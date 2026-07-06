@@ -37,7 +37,7 @@ function Negotiation() {
       ...prev,
       {
         sender: "user",
-        text: `I would like to settle my loan for ₹${userOffer}`,
+        text: userOffer,
       },
     ]);
 
@@ -51,7 +51,7 @@ function Negotiation() {
         `
 
 Customer:
-I would like to settle my loan for ₹${userOffer}
+${userOffer}
 
 `;
 
@@ -201,15 +201,15 @@ ${aiReply}
        <div className="mt-6 flex gap-4">
 
   <input
-    type="number"
-    placeholder="💰 Enter your settlement offer..."
-    value={offer}
-    onChange={(e) => setOffer(e.target.value)}
-    onKeyDown={(e) => {
-      if (e.key === "Enter") negotiate();
-    }}
-    className="flex-1 rounded-xl border border-slate-300 px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-  />
+  type="text"
+  placeholder="Type your message..."
+  value={offer}
+  onChange={(e) => setOffer(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") negotiate();
+  }}
+  className="flex-1 rounded-xl border border-slate-300 px-5 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+/>
 
   <button
     onClick={negotiate}
