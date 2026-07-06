@@ -5,7 +5,11 @@ from app.database.db import get_db
 from app.models.user import User
 from app.schemas.user import UserCreate, UserLogin
 from app.core.security import hash_password, verify_password
-
+from app.core.security import (
+    hash_password,
+    verify_password,
+    create_access_token,
+)
 router = APIRouter(
     prefix="/auth",
     tags=["Authentication"]
@@ -46,6 +50,13 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     if not verify_password(user.password, existing_user.password):
         raise HTTPException(status_code=401, detail="Invalid Password")
 
+    token = create_access_token(
+        {
+            "sub": existing_user.email
+        }
+    )
+
     return {
-        "message": "Login Successful"
+        "access_token": token,
+        "token_type": "bearer"
     }
