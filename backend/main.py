@@ -1,11 +1,17 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.database.db import engine
+from app.database.base import Base
+from app.routers.auth import router as auth_router
+# Create database tables
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="FinRelief AI API",
     description="AI Powered Debt Relief & Financial Recovery Platform",
     version="1.0.0",
 )
+app.include_router(auth_router)
 
 # Allow React frontend to access backend
 origins = [
