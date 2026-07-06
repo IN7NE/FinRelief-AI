@@ -1,0 +1,38 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI(
+    title="FinRelief AI API",
+    description="AI Powered Debt Relief & Financial Recovery Platform",
+    version="1.0.0",
+)
+
+# Allow React frontend to access backend
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/")
+def home():
+    return {
+        "message": "Welcome to FinRelief AI",
+        "status": "Backend Running Successfully"
+    }
+
+
+@app.get("/health")
+def health_check():
+    return {
+        "status": "Healthy",
+        "service": "FinRelief AI Backend"
+    }
