@@ -1,8 +1,8 @@
+from app.schemas.loan import LoanCreate, LoanResponse, LoanUpdate
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database.db import get_db
-from app.schemas.loan import LoanCreate, LoanResponse
 from app.services.loan_service import (
     create_loan,
     get_loans,
@@ -14,6 +14,7 @@ from app.services.loan_service import (
     get_loans,
     get_loan,
     delete_loan,
+    update_loan,
     get_loans_by_status,
     get_dashboard_summary,
 )
@@ -42,7 +43,21 @@ def single_loan(loan_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Loan not found")
 
     return loan
+@router.put("/{loan_id}", response_model=LoanResponse)
+def edit_loan(
+    loan_id: int,
+    loan: LoanUpdate,
+    db: Session = Depends(get_db),
+):
+    updated = update_loan(db, loan_id, loan)
 
+    if not updated:
+        raise HTTPException(
+            status_code=404,
+            detail="Loan not found",
+        )
+
+    return updated
 
 @router.delete("/{loan_id}")
 def remove_loan(loan_id: int, db: Session = Depends(get_db)):
