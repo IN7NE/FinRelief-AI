@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database.db import engine
 from app.database.base import Base
 from app.routers.auth import router as auth_router
+from app.routers.loan import router as loan_router
+from app.routers.settlement import router as settlement_router
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
@@ -12,6 +14,8 @@ app = FastAPI(
     version="1.0.0",
 )
 app.include_router(auth_router)
+app.include_router(loan_router)
+app.include_router(settlement_router)
 
 # Allow React frontend to access backend
 origins = [
