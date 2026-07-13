@@ -1,6 +1,6 @@
 # FinRelief-AI
 TEAM MEMBERS :- JATIN 
 RAJESH
-HIMANI.
+HIMANI:-backend workd login authentications
 SHANTANU
 NISTHA
