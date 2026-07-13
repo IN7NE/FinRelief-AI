@@ -1,0 +1,44 @@
+# ===========================
+# Python
+# ===========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+.venv/
+
+# Environment Variables
+
+# SQLite Database
+*.db
+*.sqlite3
+
+# ===========================
+# Node / React
+# ===========================
+node_modules/
+dist/
+build/
+.vite/
+
+# ===========================
+# IDE
+# ===========================
+.vscode/
+.idea/
+
+# ===========================
+# OS Files
+# ===========================
+.DS_Store
+Thumbs.db
+
+# ===========================
+# Logs
+# ===========================
+*.log
+.env
+backend/generated/
